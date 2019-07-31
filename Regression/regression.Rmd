@@ -1,0 +1,49 @@
+---
+title: "Linear Regression"
+output: html_document
+---
+
+```{r }
+library(ggplot2) # Package Used for plotting
+
+df<-read.csv("dataset.csv")  # read the csv file  
+
+head(df)   # View the top rows
+
+```
+
+
+```{r}
+names(df)<-c("gender","age","head_size","weight_grams")  # rename the dataframe columns for readability
+
+head(df)
+```
+
+
+```{r}
+ggplot(df, aes(x=head_size, y=weight_grams)) + geom_point()  # plot the two variables used for regression in order to see their relation
+
+```
+
+```{r}
+scatter.smooth(x=df$head_size, y=df$weight_grams, main="head_size ~ weight_grams")  # scatterplot with fit line
+
+```
+
+'''
+```{r}
+cor(df$head_size,df$weight_grams)   # Calcualte the correlation between the two params
+```
+
+```{r}
+linearMod <- lm(head_size ~ weight_grams, data=df)  # build linear regression model 
+
+print(linearMod)
+
+
+```
+Model Summary
+```{r}
+summary(linearMod)
+
+```
